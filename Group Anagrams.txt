@@ -1,0 +1,24 @@
+
+class Solution {
+    public List<List<String>> groupAnagrams(String[] strs) {
+        // Create a HashMap to store the anagram groups
+        Map<String, List<String>> map = new HashMap<>();
+
+        // Iterate over each word in the input array
+        for (String word : strs) {
+            // Convert the word to a char array and sort it
+            char[] charArray = word.toCharArray();
+            Arrays.sort(charArray);
+            String sortedWord = String.valueOf(charArray);
+
+            // If the sorted word is not in the map, add it with an empty list
+            map.putIfAbsent(sortedWord, new ArrayList<>());
+
+            // Add the original word to its corresponding anagram group
+            map.get(sortedWord).add(word);
+        }
+
+        // Return the values (anagram groups) from the map
+        return new ArrayList<>(map.values());
+    }
+}
